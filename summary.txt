@@ -1,0 +1,19 @@
+
+Binary columns: dropped most soil type columns that had a relative frequency of true labels below 1% among all soil type columns. I plotted the conditional distribution of the target and decided to keep 1 soil type bleow 1% because the target had a very imbalanced distribution.
+Joined one-hot encoded soil type columns. Dropped Wilderness_Area_2 for its low relevance.
+
+Tried engineering some new features; Elevation_CLuster that contained 3 clusters based on Elevation feature (that had a trimodal distribution).
+Distance_To_Hidrology (from vertical and horizontal distance)
+Average Hillshade(from 3 hillshade variables)
+
+Used bayesian optimization (Optuna) for grid search and tried out various hyperparameter settings.
+Usually max_depth was required to be above 10 to get a good model performance, however the seemingly overfit model performed better on Kaggle dataset than the more balanced, with slightly lower accuracy.
+
+First I ran a saturated model that contained all of my variables, then based on RFC feature importance I started dropping features, and trying to get the best combination on a trial and error base.
+
+For the freestyle contest I used LGBM with various settings, it performed slightly better.
+
+
+Best RFC score:0.72970
+
+Best LGBM score:0.73981
